@@ -7,25 +7,25 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-public class MyUser{
+public class MyUser extends User{
 
-    public MyUser(Long id,String username, String password) {
-        this.username = username;
-        this.password = password;
+    
+
+    public MyUser(Long id,String username, String password,String email, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
         this.id = id;
+        this.email = email;
     }
-
     private long id;
-    private String username;
-    private String password;
+    private String email;
    
     private List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
 
     @Override
     public String toString() {
         return String.format(
-                "User[id=%d, username='%s', password='%s']",
-                id, username, password);
+                "User[id=%d, username='%s', password='%s', email='%s']",
+                id, getUsername(), getPassword(), email);
     }
     public long getId() {
         return id;
@@ -35,26 +35,18 @@ public class MyUser{
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
     public List<GrantedAuthority> getAuth() {
         return auth;
     }
     public void setAuth(List<GrantedAuthority> auth) {
         this.auth = auth;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
    
