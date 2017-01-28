@@ -1,4 +1,4 @@
-package com.example;
+package com.example.db;
 
 
 import java.util.ArrayList;

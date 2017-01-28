@@ -1,7 +1,7 @@
 package com.example.Auth;
 
 import com.example.MyUI;
-import com.example.UserService;
+import com.example.db.UserService;
 import com.vaadin.ui.UI;
 
 import org.springframework.beans.factory.annotation.Autowired;
