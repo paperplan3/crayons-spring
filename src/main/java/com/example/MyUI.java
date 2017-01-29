@@ -39,7 +39,7 @@ public class MyUI extends UI {
     }
 
     public void showMainView() {
-        addStyleName(ValoTheme.UI_WITH_MENU);
+        
         setContent(new MainView(MyUI.this));
         getNavigator().navigateTo(getNavigator().getState());
     }

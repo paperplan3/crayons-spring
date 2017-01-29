@@ -1,11 +1,9 @@
 package com.example.Auth;
 
-import com.example.MyUI;
+import com.example.MyUI; 
 import com.example.db.UserService;
-import com.vaadin.ui.UI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,9 +22,8 @@ import java.util.Collection;
 @Component
 public class AuthManager implements AuthenticationManager {
 
-    
+    @Autowired
     private UserService userService;
-    private static boolean hasAuthority = false;
 
     public Authentication authenticate(Authentication auth) throws AuthenticationException, UsernameNotFoundException {
         String username = (String) auth.getPrincipal();
@@ -36,20 +33,14 @@ public class AuthManager implements AuthenticationManager {
 
         if (user != null && user.getPassword().equals(password)) {
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
-            hasAuthority = true;
+          
             MyUI.get().showMainView();
             return new UsernamePasswordAuthenticationToken(username, password, authorities);
         }
         throw new BadCredentialsException("Bad Credentials");
     }
 
-    public static void setHasAuthority(boolean hasAuthority) {
-        AuthManager.hasAuthority = hasAuthority;
-    }
-
-    public static boolean isHasAuthority() {
-        return hasAuthority;
-    }
+  
 
     
     

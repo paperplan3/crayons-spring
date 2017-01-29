@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.beans.factory.annotation.Autowired;  
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -15,19 +15,19 @@ import com.vaadin.ui.Notification;
 
 @Component
 public class LoginFormListener implements Button.ClickListener {
-
+    
+    @Autowired
     private AuthManager authManager;
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
         try {
             Button source = event.getButton();
-            Login parent = (Login) source.getParent();
-            String username = parent.getTxtLogin().getValue();
+            Login parent =  (Login) source.getParent();
+            String user = parent.getTxtLogin().getValue();
             String password = parent.getTxtPassword().getValue();
 
-            UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(username, password);
-
+            UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(user, password);
             Authentication result = authManager.authenticate(request);
 
             SecurityContextHolder.getContext().setAuthentication(result);

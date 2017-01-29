@@ -31,26 +31,26 @@ public class UserRepository implements CommandLineRunner {
     private void insertData() {
         log.info("@@ Creating tables");
         
-        jdbcTemplate.execute("DROP TABLE IF EXISTS customers");
-        jdbcTemplate.execute("CREATE TABLE customers(id serial PRIMARY KEY, username VARCHAR(100) UNIQUE NOT NULL, password VARCHAR(100) NOT NULL, email VARCHAR(100) UNIQUE NOT NULL)");
-        jdbcTemplate.execute("insert into customers(username, password, email) values('Siva','foooo','silva@crayons.de')");
-        jdbcTemplate.execute("insert into customers(username, password, email) values('Lula','boooo','lula@crayons.de')");
+        jdbcTemplate.execute("DROP TABLE IF EXISTS users");
+        jdbcTemplate.execute("CREATE TABLE users(id serial PRIMARY KEY, username VARCHAR(100) UNIQUE NOT NULL, password VARCHAR(100) NOT NULL, email VARCHAR(100) UNIQUE NOT NULL)");
+        jdbcTemplate.execute("insert into users(username, password, email) values('admin','pass','admin@crayons.de')");
+        jdbcTemplate.execute("insert into users(username, password, email) values('user','pass','user@crayons.de')");
         log.info("@@ > Done.");
     }
     
 
     /**
-     * @return returns of the table <customers> in the DB
+     * @return returns of the table <users> in the DB
      * This method will use the jdbcTemplate instance and the query method
      * (that accepts a SQL syntax) to get all the data; it will return a collection of Journal
      * instances.
      * 
      */
-    public List<MyUser> findAll(){
+    public List<CrayonsUser> findAll(){
         log.info("@@ Querying");
-        List<MyUser> entries = new ArrayList<>();
+        List<CrayonsUser> entries = new ArrayList<>();
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        jdbcTemplate.query("SELECT * FROM customers",new Object[]{},(rs,row) -> new MyUser(rs.getLong("id"),
+        jdbcTemplate.query("SELECT * FROM users",new Object[]{},(rs,row) -> new CrayonsUser(rs.getLong("id"),
         rs.getString("username"), rs.getString("password"), rs.getString("email"),authorities)).forEach(entry -> entries.add(entry));
         log.info("> Done.");
         return entries;

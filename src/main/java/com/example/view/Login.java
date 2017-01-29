@@ -15,51 +15,36 @@ import com.vaadin.ui.themes.Reindeer;
 import com.example.*;
 import com.example.controller.LoginFormListener;
 
-//@SpringUI
-@Theme("valo")
+
 public class Login extends VerticalLayout {
 
-    /**
-     * 
-     */
+   
     private static final long serialVersionUID = 1L;
-    private TextField user = new TextField("User:");
+    private TextField username = new TextField("User:");
     private PasswordField password = new PasswordField("Password:");
     private Button loginButton = new Button("Login");
 
     public Login() {
-
         this.loginViewBuilder();
+        LoginFormListener loginFormListener = getLoginFormListener();
+        loginButton.addClickListener(loginFormListener);
 
     }
 
     public void loginViewBuilder() {
-
-        user.setWidth("300px");
-        user.setRequired(true);
-        user.setInputPrompt("Your username");
+       
+        username.setWidth("300px");
+        username.setRequired(true);
+        username.setInputPrompt("Your username");
 
         password.setWidth("300px");
         password.setRequired(true);
         password.setValue("");
         password.setNullRepresentation("");
 
-        VerticalLayout fields = new VerticalLayout(user, password, loginButton);
-        fields.setCaption("Please login to access the application");
-        fields.setSpacing(true);
-        fields.setMargin(new MarginInfo(true, true, true, false));
-        fields.setSizeUndefined();
 
-        VerticalLayout uiLayout = new VerticalLayout(fields);
-        uiLayout.setSizeFull();
-        uiLayout.setComponentAlignment(fields, Alignment.MIDDLE_CENTER);
-        setStyleName(Reindeer.LAYOUT_BLUE);
-
-        LoginFormListener loginFormListener = getLoginFormListener();
-
-        loginButton.addClickListener(loginFormListener);
-
-        addComponents(uiLayout);
+        
+        addComponents(username,password,loginButton);
         setMargin(true);
         setSpacing(true);
     }
@@ -71,7 +56,7 @@ public class Login extends VerticalLayout {
     }
 
     public TextField getTxtLogin() {
-        return user;
+        return username;
     }
 
     public PasswordField getTxtPassword() {

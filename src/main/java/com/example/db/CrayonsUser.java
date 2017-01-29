@@ -7,11 +7,11 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-public class MyUser extends User{
+public class CrayonsUser extends User{
 
     
 
-    public MyUser(Long id,String username, String password,String email, Collection<? extends GrantedAuthority> authorities) {
+    public CrayonsUser(Long id,String username, String password,String email, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.id = id;
         this.email = email;
